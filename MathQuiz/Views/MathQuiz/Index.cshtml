@@ -1,0 +1,99 @@
+﻿<!--Created By John C Rinker II - Feb 10 2016-->
+<!-- Olga layout  edits - Feb 16 -->
+@{
+    ViewBag.Title = "Math Quiz";
+}
+
+@section Styles {
+    <!--Added style to change the font apperance- Nathan Owens - Feb 11 2016-->
+    <style>
+        .fontColor {
+            font-family: 'Cooper', Tahoma, Geneva, Verdana, sans-serif;
+            font-size:40px;
+            margin-left:auto;
+            margin-right:auto;
+            color:darkseagreen;
+            text-align:center;
+        }
+
+        .radio label, .checkbox label { 
+            font-weight:bold !important;
+        }
+    </style>
+
+}
+
+
+<div class="row text-center">
+    <div class="form-group">
+        @using (Html.BeginForm("CreateTest", "MathQuiz"))
+        {
+
+
+            <div class="col-md-0">
+                <fieldset>
+                    <!--Added fontColor to change the font apperance- Nathan Owens - Feb 11 2016-->
+                        <label class="fontGreen">Skill to Practice</label>
+                    <div style="width:200px;margin-left:auto;margin-right:auto;text-align:left;">
+                        <div class="radio"><label><input type="checkbox" value="+" name="Addition" />Addition</label></div>
+                        <div class="radio"><label><input type="checkbox" value="-" name="Subtraction" />Subtraction</label></div>
+                        <div class="radio"><label><input type="checkbox" value="*" name="Multiplication" />Multiplication</label></div>
+                        <div class="radio"><label><input type="checkbox" value="/" name="Division" />Division</label></div>
+                    </div>
+                   
+                </fieldset>
+             </div>
+            <div class="col-md-0">
+                <fieldset>
+                    <!--Added fontColor to change the font apperance- Nathan Owens - Feb 11 2016-->
+                    <label class="fontGreen">Difficulty Level</label>
+                    <div style="width:200px;margin-left:auto;margin-right:auto;text-align:left;">
+                        <div class="checkbox"><label><input type="radio" value="1" name="Difficulty" />Easy</label></div>
+                        <div class="checkbox"><label><input type="radio" value="2" name="Difficulty" />Medium</label></div>
+                        <div class="checkbox"><label><input type="radio" value="3" name="Difficulty" />Hard</label></div>
+                        </div>
+</fieldset>
+           </div>
+            <!--Added the button class and changed apperance- Nathan Owens - Feb 11 2016-->
+            <div class="col-md-0">
+                <div style="width:200px;margin-left:auto;margin-right:auto;text-align:left;">
+                    <button type="submit" class="btn btn-danger btn-lg" style="margin-left: 20px;">Start</button>
+                    @Html.ActionLink("Cancel", "Index", "Home", null, new {@class = "btn btn-primary btn-lg"})
+                </div>
+            </div>
+        }
+    </div>
+    <div id="noSelection" hidden="hidden" class="alert alert-danger col-md-11 "> Please Make a selection</div>
+</div>
+
+<!-- Created by Zain Hatim on 02/17/2016
+    Validates user selection, will prevent creating test if user didn't make any selection
+    -->
+<script src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('form').on('submit', function (e) {          
+            validate('input[type=radio]', e);
+            validate('input[type=checkbox]', e);
+        });
+        var validate = function (className, event) {
+            var counter = 0;
+            var radios = $(className);
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked == false) {
+                    counter = 0;
+                } else {
+                    counter = 1;
+                    break;
+                }
+            }
+            if (counter == 0) {
+                event.preventDefault();
+                $('div#noSelection').show();
+            }
+            else {
+                return true;
+            }
+        };
+    });
+</script> 

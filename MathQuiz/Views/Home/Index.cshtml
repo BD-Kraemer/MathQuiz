@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Styles {
+    <style>
+        .btn-padding {
+            margin:10px;
+            width:200px;
+        }
+
+    </style>
+   
+}
+    <div class="fontGreen centerHeading">
+        <p>Hello, @ViewBag.User</p>
+    </div>
+    <div class="centerHeading">
+        
+        
+        @{
+            if (ViewBag.User != "Guest")
+            {
+                @Html.ActionLink("Review Past Quizes", "PastQuizes", "Home", null, new { @class = "btn btn-primary btn-lg btn-padding" })
+                <br />
+                @Html.ActionLink("Change password", "ChangePassword", "Manage", null, new { @class = "btn btn-primary btn-lg btn-padding" })
+                <br />
+                //@Html.ActionLink("Change your password", "ChangePassword")
+            }
+        }
+        @Html.ActionLink("Start a New Quiz", "Index", "MathQuiz", null, new { @class = "btn btn-success btn-lg btn-padding" })
+    </div>

@@ -1,0 +1,84 @@
+﻿<!-- Created by John C Rinker II On: 2/17/2016
+    Details shows the logged in user every problem taken 
+    and the correct/ incorrect status of every problem
+    for a particular quiz.    
+-->
+@using MathQuiz.Models
+@model UserTest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section Styles {
+    <style>
+        /*Change the color-Nathan Owens-23 FEB 2016*/
+        th {
+            background-color: #006dcc !important;
+            color: white;
+            text-align: center;
+        }
+
+        /*Change the color-Nathan Owens-23 FEB 2016*/
+        tr {
+            background-color:#cde5ff !important;
+        }
+
+        .table-striped > tbody > tr:nth-child(odd) > td {
+            background-color: #e6f2ff !Important;
+        }
+
+        /*Change the font size-Nathan Owens-23 FEB 2016*/
+        table {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .incorrect {
+            color:red;
+        }
+
+        .correct {
+            color:forestgreen;
+        }
+    </style>
+
+}
+
+<div class="fontGreen centerHeading">
+    <p>Quiz Review</p>
+</div>
+
+<table class="table table-striped">
+    <tr>
+        <th>Problem Number</th>
+        <th>Problem</th>
+        <th>Answer</th>
+        <th>Your Answer</th>
+        <th>Result</th>
+    </tr>
+    @{  foreach (Problem p in Model.Problems) {
+        <tr>
+            <td>
+                @(p.seq)
+            </td>
+            <td>@(Convert.ToInt32(p.FirstNumber)) @p.Operator @(Convert.ToInt32(p.SecondNumber))</td>
+            <td>@(Convert.ToInt32(p.CorrectAnswer))</td>
+            <td>@(Convert.ToInt32(p.UserAnswer))</td>
+            <td>@{if (p.UserAnswer == p.CorrectAnswer) {
+                   <label class="correct">Correct</label>
+                }
+                else {
+                    <label class="incorrect">Incorrect</label>
+                }
+            }</td>
+        </tr>
+
+
+
+        }
+    }
+</table>

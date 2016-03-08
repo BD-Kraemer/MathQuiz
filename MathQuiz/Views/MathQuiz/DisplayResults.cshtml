@@ -1,0 +1,54 @@
+﻿<!--Created By John C Rinker II - Feb 10 2016-->
+<!-- Olga style, layout edits - Feb 19, Feb 21 2016-->
+@*Brian added go home button*@
+@using MathQuiz.Models
+@model UserTest
+
+@{
+    ViewBag.Title = "DisplayResults";
+}
+
+<br /><br /><br />
+
+<div>
+    <div class="fontGreen">
+        <p>Test Results</p>
+    </div>
+    <hr />
+    
+    <div class="col-md-0">
+        <fieldset>
+            <label style="color:black; font-size:30px;">Your Score is</label>
+
+                @{ int scoreVal = (int)(Model.Score * 100);
+                    if (scoreVal < 60)
+                    {
+                        <h2 style="color:red;">@scoreVal %</h2>
+                    }
+                    else if (scoreVal >= 60 && scoreVal < 80)
+                    {   <!--Changed color to DarkOrange to see better on white back ground- Nathan Owens- Feb 13 2016-->
+                        <h2 style="color:darkorange;">@scoreVal%</h2>
+                    }
+                    else if (scoreVal >= 80)
+                    {
+                        <h2 style="color:green;">@scoreVal%</h2>
+                    }
+                    else
+                    {
+                        <h2 style="color:purple;">@scoreVal%</h2>
+                    }
+                }
+
+</fieldset>
+    </div>
+</div>
+<div style="margin-top: 20px;">
+    @Html.ActionLink("Review Quiz", "Details", "Home", new { id = Model.TestID }, new { @class = "btn btn-success btn-lg" })
+    @Html.ActionLink("Start a New Quiz", "Index", "MathQuiz", null, new { @class = "btn btn-success btn-lg" })
+    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-danger btn-lg" })
+
+
+
+    
+    
+</div>

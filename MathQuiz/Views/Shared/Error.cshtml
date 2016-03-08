@@ -1,0 +1,39 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+
+@*Uncomment the second half of the if statement below when deploying to final production.*@
+@if (Model != null /*&& HttpContext.Current.IsDebuggingEnabled*/)
+{
+    <table class="table table-striped">
+        <tr>
+            <th colspan="2">Error details</th>
+        </tr>
+        <tr>
+            <td>Controller</td>
+            <td>@Model.ControllerName</td>
+        </tr>
+        <tr>
+            <td>Action</td>
+            <td>@Model.ActionName</td>
+        </tr>
+        <tr>
+            <td>Exception Type</td>
+            <td>@Model.Exception.GetType().ToString()</td>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td>@Model.Exception.Message</td>
+        </tr>
+        <tr>
+            <td>Stack trace</td>
+            <td>@Model.Exception.StackTrace</td>
+        </tr>
+    </table>
+}
+

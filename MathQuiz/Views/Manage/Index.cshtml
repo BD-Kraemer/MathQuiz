@@ -1,0 +1,17 @@
+﻿<!--Olga style edits - Feb 19 2016-->
+
+@model MathQuiz.Models.IndexViewModel
+@{
+    ViewBag.Title = "My Account";
+}
+
+<h2 class="fontGreen">@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+
+    <hr />
+                @Html.ActionLink("Back to Account", "Index", "Home", null, new {@class= "btn btn-primary" })
+         
+    
+</div>

@@ -1,0 +1,84 @@
+﻿<!--Created By John C Rinker II - Feb 10 2016-->
+<!--Olga style/layout edits - Feb 21-->
+@using MathQuiz.Models
+@model Problem
+
+@{
+    ViewBag.Title = "DisplayAnswer";
+}
+
+@section Styles {
+    <!--Added style to change the font apperance- Nathan Owens - Feb 13 2016-->
+    <style>
+        .fontColor {
+            font-family: 'Cooper', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 40px !important;
+            margin-left: auto;
+            margin-right: auto;
+            color: darkseagreen;
+            text-align: left;
+        }
+
+        .radio label, .checkbox label {
+            font-weight: bold !important;
+        }
+    </style>
+
+}
+@{
+    bool correct = false;
+    if (Model.CorrectAnswer == Model.UserAnswer)
+    {
+        correct = true;
+    }
+}
+<br /><br /><br />
+<div>
+    <!--Added style to change the font apperance- Nathan Owens - Feb 13 2016-->
+    <div class="fontGreen">
+    <p>Problem @Model.seq</p>
+    </div>
+    <hr />
+    <div class="row">
+        <!--Changed values to "col-md-0"- Nathan Owens - Feb 13 2016-->
+        <div class="col-md-0"></div>
+        <div class="col-md-0">
+            <fieldset>
+                <label style="color:black; font-size:30px;">Result</label><br />
+                <span class="h2">@(Convert.ToInt32(Model.FirstNumber)) &nbsp; &nbsp; @Model.Operator &nbsp; &nbsp; @(Convert.ToInt32(Model.SecondNumber)) &nbsp; &nbsp; = &nbsp; &nbsp;</span>
+                @{
+                    if (correct)
+                    {
+                        <span style="color:green;font-size:30px;">@(Convert.ToInt32(Model.CorrectAnswer))</span>
+                            <h1 style="color:green">Correct!</h1>
+                    }
+                    else
+                    {
+                        <span style="color:green;font-size:30px;">@(Convert.ToInt32(Model.CorrectAnswer))</span>
+                            <h1 style="color:red">@(Convert.ToInt32(Model.UserAnswer)) is Incorrect!</h1><h3 style="color:black">The correct answer is @(Convert.ToInt32(Model.CorrectAnswer)).</h3>
+                    }
+                }
+            </fieldset>
+        </div>
+        <div class="col-md-0" style="margin-top: 20px;">
+            @using (Html.BeginForm("NextQuestion", "MathQuiz", FormMethod.Post))
+            {
+                <input type="hidden" name="_seq" value="@Model.seq" />
+                <input type="hidden" name="utId" value="@Model.Test_FK" />
+                
+                    if (Model.seq == 15)
+                    {
+                        <input type="submit" value="Finish Quiz" class="btn btn-primary btn-lg" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Next Problem" class="btn btn-primary btn-lg" />
+                    }
+              
+
+         }
+
+
+        </div>
+    </div>
+</div>
